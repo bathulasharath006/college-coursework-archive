@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Home</title>
+        <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+    </head>
+    
+    <body>
+		<div class="header-container">
+        	<h2>Students list</h2>
+        	<h2><a href="/courses">Go to Courses</a></h2>
+    	</div>
+    	<p>No student found. Add the students now!</p>
+		<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="{{ url_for('create_student') }}">+ Add Student</a></p>
+    </body>
+    
+</html>

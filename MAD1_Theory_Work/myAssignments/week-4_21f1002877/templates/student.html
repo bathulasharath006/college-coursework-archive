@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8"/>
+        <title>Student Data</title>
+</head>
+<body>
+     <h1>Student Details</h1>
+     <table border = "2" id = "student-details-table">
+        
+            <tr>
+              <th>Student Id</th>
+              <th>Course Id</th>
+              <th>Marks</th>
+          </tr>
+        
+        
+            {% for each_list in mini_data_list %}
+            <tr>
+                <td>{{ each_list[0] }}</td>
+                <td>{{ each_list[1] }}</td>
+                <td>{{ each_list[2] }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan = "2" style="text-align:center"> Total Marks </td>
+                <td>{{ Total_Marks }}</td>
+            </tr>
+        
+    </table>                    
+
+<p><a href="http://127.0.0.1:5000/">Go Back</a></p>
+
+</body>
+</html>
+
