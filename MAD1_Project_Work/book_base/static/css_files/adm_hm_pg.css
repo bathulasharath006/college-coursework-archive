@@ -1,0 +1,47 @@
+  .center {
+    text-align: center;
+  }
+
+  .col {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .nav-pills .nav-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin: 0 5px;
+  }
+
+  .custom-col {
+      border: 1px solid #e0e0e0;
+      padding: 10px;
+      text-align: center;
+    }
+
+    form {
+      width: 100%;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #1E90FF;
+      color: white;
+      cursor: pointer;
+    }

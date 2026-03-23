@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="21f1002877">
+    <title>ADD BOOK</title>
+    <link rel="stylesheet" href="../static/css_files/update_details.css">
+
+</head>
+<body>
+
+    <a href="#" onclick="history.back()" id="goBackButton">Back</a> 
+    {% if error %}
+    <h2><p style="position: absolute; top: 0; text-align: center; background-color: white;"> {{ error | safe }} </p></h2>
+    {% endif %}
+
+    <form action="/admin_add_book" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="sect">Section Name:</label>
+            <input type="text" id="sect" name="sect" placeholder="e.g. Department Name" required />
+        </div>
+        <div>
+            <label for="book_id">Book ID:</label>
+            <input type="text" id="book_id" name="book_id" placeholder="e.g. cs2001" required />
+        </div>
+        <div>
+            <label for="book_name">Book Name:</label>
+            <input type="text" id="book_name" name="book_name" required />
+        </div>
+        <div>
+            <label for="authors">Author(s):</label>
+            <input type="text" id="authors" name="authors" placeholder="e.g. Author1, Author2, ..." required />
+        </div>
+        <div>
+            <label for="synopsis">Synopsis:</label>
+            <input type="text" id="synopsis" name="synopsis" maxlength="1000" placeholder=" Maximum 1000 Characters ..." />
+        </div>
+        <div>
+            <label for="pages">Pages:</label>
+            <input type="number" id="pages" name="pages" placeholder="No. of Pages in the Book" required />
+        </div>
+        <div>
+            <label for="image">Select Cover Page:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+        <div>
+            <label for="pdfFile">Select PDF File:</label>
+            <input type="file" id="pdfFile" name="pdfFile" accept=".pdf" required />
+        </div>
+        <div>
+            <input type="submit" value="Upload">
+        </div>
+    </form>
+</body>
+</html>

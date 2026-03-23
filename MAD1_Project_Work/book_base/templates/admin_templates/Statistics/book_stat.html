@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="21f1002877">
+	<title>Books Statistics</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../static/css_files/statistics.css">
+
+</head>
+<body>
+	
+	<a href="/admin_logged_in" id="goBackButton">Back</a>
+
+<br>
+<ul class="nav nav-pills nav-fill">
+
+	<li class="nav-item">
+		<a class="btn btn-success" href="/statistics" > Overview </a>
+	</li>
+
+	<li class="nav-item">
+		<a class="btn btn-primary" href="#" > BookWise </a>
+	</li>
+
+	<li class="nav-item">
+		<a class="btn btn-success" href="/sectionStats" > Sections </a>
+	</li>
+
+	<li class="nav-item">
+		<a class="btn btn-success" href="/transactions" > Transactions </a>
+	</li>
+</ul>
+
+
+<div style="text-align: center;"><br>
+	 <form action="/bookStats" method="GET">
+	   <div>
+		<input type="text" id="GetDetails" name="GetDetails" placeholder="Book ID" required />
+		<input type="submit" value="Get Details" />
+	   </div>
+	 </form><br>
+
+	{% if book_id  %}
+      <div class="row">
+            <div class="col-md-7">
+                <img src="/static/book_files/{{ book_id }}.jpg" width=680px height=780px alt="BOOK IMAGE NOT FOUND"></img>
+            </div>
+            <div class="col-md-5">
+                    <img src="/static/plots/Accept_Vs_Reject.png" width=350px height=350px alt="FILE NOT FOUND"></img><br><br>
+               		<h3>Ratings</h3><br>
+                    <img src="/static/plots/ratings.png" width=680px height=350px alt="FILE NOT FOUND"></img>
+
+            </div>
+        </div>
+	{% else %}
+		<h3>Enter Book ID Which is Present in the Library Base</h3>
+	{% endif %}
+</div>
+
+
+</body>
+</html>

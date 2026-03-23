@@ -1,0 +1,16 @@
+	.some-space {
+    display: inline-block;
+    width: 60px;
+	}
+	
+	h3 {
+	  display: inline-block;
+	  background-color: white;
+	}
+	
+	.form-popup {
+	  display: none;
+	  position: fixed;
+	  background-color: white;
+	}
+

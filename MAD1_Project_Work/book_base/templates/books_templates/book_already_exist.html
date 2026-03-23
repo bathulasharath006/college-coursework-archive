@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="21f1002877">
+  <title>Book ID Already Exist</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<style>
+  
+	#goBackButton {
+	  position: absolute;
+	  top: 10px;
+	  right: 10px;
+	  text-decoration: none;
+	  padding: 10px;
+	  color: black;
+	  background-color: white;
+	  border: 1px solid silver;
+	  border-radius: 5px;
+	}
+
+	#goBackButton:hover {
+	  background-color: #ddd;
+	  color: #333;
+	}
+
+</style>
+
+</head>
+<body style="background-image: url('/static/user_home_page.avif');" >
+
+		<a href="/admin_logged_in" id="goBackButton">Back</a>
+
+    <div class="container">
+      <br><h1 style="background-color: white; text-align: center;">Book ID already in use, try different Book ID</h1><br>    
+        <div class="row">
+            <div class="col-md-7">
+            		<iframe class="pdf" src="/static/book_files/{{ book.book_id }}.pdf" width=750px height=850px alt="BOOK FILE NOT FOUND">
+        			</iframe>
+            </div>
+            <div class="col-md-5">
+                <div class="card ">
+                    <div class="card-body">
+                        <h3 class="card-title">Highlights</h3>
+                        <p><b>Section:</b> {{ book.sect.title() }}</p>
+                        <p><b>Book ID:</b> {{ book.book_id }}</p>
+                        <p><b>Book Name:<h4> {{ book.book_name.title() }}</h4></b></p>
+                        <p><b>Author(s):</b> {{ book.authors.title() }}</p>
+                        <p><b>Synopsis:</b> <br><br>{{ book.synopsis }}</p>
+                        <p><b>Pages:</b> {{ book.pages }}</p>
+                        <p><b>Added on:</b> {{ book.added_on }}</p>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+

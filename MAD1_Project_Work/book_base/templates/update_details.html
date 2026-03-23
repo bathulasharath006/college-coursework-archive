@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="21f1002877">
+	<title>Update {{ role }} Details</title>
+    <link rel="stylesheet" href="../static/css_files/update_details.css">
+
+</head>
+
+<body>
+	
+		<a href="#" onclick="history.back()" id="goBackButton">Back</a>
+	
+		{% if role == "Student" %}
+    		<form action="/update_student_details" method="GET" id="getDetailsForm" >
+    	{% endif %}
+    	{% if role == "Librarian" %}
+    		<form action="/update_librarian_details" method="GET" id="getDetailsForm" >
+    	{% endif %}
+
+            <div>
+              <input type="email" id="GetDetails" name="GetDetails" value="{{ email }}" placeholder="Student Email ID" required />
+              <input type="submit" value="Get Details" />
+            </div>
+          </form>
+
+	{% if noDetailsMessage %}
+		<h2><p style="bottom: 0; text-align: center; background-color: white;"> {{ noDetailsMessage | safe }} </p></h2>
+	
+	{% else %}
+	
+		{% if role == "Student" %}
+    		<form action="/update_student_details" method="POST" >
+    	{% endif %}
+    	{% if role == "Librarian" %}
+    		<form action="/update_librarian_details" method="POST" >
+    	{% endif %}
+
+    	<div>
+			<label><b><h2>Update {{ role }} Info</h2></b></label>
+		</div>    
+    	<div>
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" value="{{ email }}" disabled/>
+			<input type="hidden" name="email" value="{{ email }}">
+		</div>
+		
+    	<div>
+			<label for="full_name">Full Name:</label>
+			<input type="text" id="full_name" name="full_name" value="{{ full_name }}" placeholder="e.g. Dennis Ritchie" required />
+		</div>
+		
+    	<div>
+			<label for="number">Mobile Number:</label>
+			<input type="text" id="number" name="number" pattern="\d{10}" value="{{ number }}" title="Please enter a 10-digit number." placeholder="e.g. 9876543210" required />
+		</div>
+		
+		<div>
+			<label for="create_password">Create Password:</label>
+			<input type="password" id="create_password" name="create_password" pattern=".{8,}" title="Password must be at least 8 characters" placeholder="Strong Password" required />
+		</div>
+		
+		<div>
+			<label for="confirm_password">Confirm Password:</label>
+			<input type="password" id="confirm_password" name="confirm_password" pattern=".{8,}" title="Password must be at least 8 characters" placeholder="Re-enter Password" required />
+		</div>
+		
+		<div>
+			<label for="key">Secret Key:</label>
+			<input type="text" id="key" name="key" pattern="\d{6}" title="Please enter a 6-digit number." placeholder="Key for Password Recovery e.g. 123456" required />
+			</div>
+						
+		<div>
+			<input type="submit" value = "Update Details" style="background-color: #008000;" onclick="matchPassword()">
+		</div>
+	</form>
+	{% endif %}
+
+
+  <script>
+    function matchPassword()
+		{ 
+		    var createPassword = document.getElementById("create_password").value;
+		    var confirmPassword = document.getElementById("confirm_password").value;
+
+		  if ( createPassword !== confirmPassword )
+		 	{ alert("Passwords did not match");
+		 	  document.getElementById("confirm_password").value = '';
+		 	}
+		}
+  </script>
+
+
+</body>
+</html>

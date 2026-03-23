@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="21f1002877">
+	<title>Admin Home Page</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css_files/adm_hm_pg.css">
+
+</head>
+<body>
+
+  <h1 class="center">Librarian Management System</h1>
+<div class="container-fluid text-center">
+  <div class="row">
+    <div class="col-sm custom-col" style="background-color:#FFB5C5">
+      <h5>Student</h5>
+    </div>
+    <div class="col-sm custom-col" style="background-color:#FFFACD">
+      <h5>Librarian</h5>
+    </div>
+    <div class="col-sm custom-col" style="background-color:#FFA07A">
+      <h5>Book</h5>
+    </div>
+  </div>
+</div>
+
+
+<ul class="nav nav-pills nav-fill">
+<li class="nav-item">
+	<!-- STUDENT REGISTER BUTTON -->
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerStudentModal">
+	  + Register
+	</button>
+
+	<!-- Register Student Modal -->
+	<div class="modal fade" id="registerStudentModal" tabindex="-1" aria-labelledby="registerStudentModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+		    <h1 class="modal-title fs-5" id="registerStudentModalLabel">+ Register Student</h1>
+		    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+		    <form action="/register" method="POST">
+			  	<div>
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" placeholder="e.g. abc@gmail.com" required />
+				</div>
+				<div>
+					<label for="full_name">Full Name:</label>
+					<input type="text" id="full_name" name="full_name" placeholder="e.g. Dennis Ritchie" required />
+				</div>
+				<div>
+					<label for="number">Mobile Number:</label>
+					<input type="text" id="number" name="number" pattern="\d{10}" title="Please enter a 10-digit number." placeholder="e.g. 9876543210" required />
+				</div>
+				<div>
+					<label for="create_password">Create Password:</label>
+					<input type="password" id="create_password" name="create_password" pattern=".{8,}" title="Password must be at least 8 characters" placeholder="Strong Password" required />
+				</div>
+				<div>
+					<label for="confirm_password">Confirm Password:</label>
+					<input type="password" id="confirm_password" name="confirm_password" pattern=".{8,}" title="Password must be at least 8 characters" placeholder="Re-enter Password" required />
+				</div>
+				<div>
+					<label for="key">Secret Key:</label>
+					<input type="text" id="key" name="key" pattern="\d{6}" title="Please enter a 6-digit number." placeholder="Key for Password Recovery e.g. 123456" required />
+				</div>
+				<div>
+					<input type="submit" value = "Create Account" style="background-color: #008000;" onclick="matchPassword()">
+				</div>
+			</form>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</li>
+  
+<li class="nav-item">
+  <!-- STUDENT UPDATE BUTTON -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateStudentModal">
+    Update
+  </button>
+
+  <!-- Update Student Modal -->
+  <div class="modal fade" id="updateStudentModal" tabindex="-1" aria-labelledby="updateStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateStudentModalLabel">Update Student Info</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/update_student_details" method="GET" id="getDetailsForm" >
+            <div>
+              <input type="email" id="GetDetails" name="GetDetails" placeholder="Student Email ID" required />
+              <input type="submit" value="Get Details" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</li>  
+
+<li class="nav-item">
+	<!-- STUDENT DELETE BUTTON -->
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteStudentModal">
+	  - Delete
+	</button>
+
+  <!-- Delete Student Modal -->
+  <div class="modal fade" id="deleteStudentModal" tabindex="-1" aria-labelledby="deleteStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteStudentModalLabel">Delete Student Account</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/delete_student_account" method="GET" id="getDetailsForm" >
+            <div>
+              <input type="email" id="GetDetails" name="GetDetails" placeholder="Student Email ID" required />
+              <input type="submit" value="Get Details" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</li>
+
+<li class="nav-item">
+	<!-- LIBRARIAN REGISTER BUTTON -->
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerLibrarianModal">
+	  + Register
+	</button>  
+
+	<!-- Register Librarian Modal -->
+	<div class="modal fade" id="registerLibrarianModal" tabindex="-1" aria-labelledby="registerLibrarianModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+		    <h1 class="modal-title fs-5" id="registerLibrarianModalLabel">+ Register Librarian</h1>
+		    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+		    <form action="/registerLibrarian" method="POST">
+			  	<div>
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" placeholder="e.g. abc@gmail.com" required />
+				</div>
+				<div>
+					<label for="full_name">Full Name:</label>
+					<input type="text" id="full_name" name="full_name" placeholder="e.g. Dennis Ritchie" required />
+				</div>
+				<div>
+					<label for="number">Mobile Number:</label>
+					<input type="text" id="number" name="number" pattern="\d{10}" title="Please enter a 10-digit number." placeholder="e.g. 9876543210" required />
+				</div>
+				<div>
+					<label for="create_password">Create Password:</label>
+					<input type="password" id="create_password" name="create_password" pattern=".{8,}" title="Password must be at least 8 characters" placeholder="Strong Password" required />
+				</div>
+				<div>
+					<label for="confirm_password">Confirm Password:</label>
+					<input type="password" id="confirm_password" name="confirm_password" pattern=".{8,}" title="Password must be at least 8 characters" placeholder="Re-enter Password" required />
+				</div>
+				<div>
+					<label for="key">Secret Key:</label>
+					<input type="text" id="key" name="key" pattern="\d{6}" title="Please enter a 6-digit number." placeholder="Key for Password Recovery e.g. 123456" required />
+				</div>	
+				<div>
+					<input type="submit" value = "Create Account" style="background-color: #008000;" onclick="matchPassword()">
+				</div>
+			</form>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</li>
+
+<li class="nav-item">
+  <!-- LIBRARIAN UPDATE BUTTON -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateLibrarianModal">
+    Update
+  </button>
+
+  <!-- Update Librarian Modal -->
+  <div class="modal fade" id="updateLibrarianModal" tabindex="-1" aria-labelledby="updateLibrarianModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateLibrarianModalLabel">Update Librarian Info</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/update_librarian_details" method="GET" id="getDetailsForm" >
+            <div>
+              <input type="email" id="GetDetails" name="GetDetails" placeholder="Librarian Email ID" required />
+              <input type="submit" value="Get Details" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</li>
+
+<li class="nav-item">
+	<!-- LIBRARIAN DELETE BUTTON -->
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteLibrarianModal">
+	  - Delete
+	</button>
+
+  <!-- Delete Librarian Modal -->
+  <div class="modal fade" id="deleteLibrarianModal" tabindex="-1" aria-labelledby="deleteLibrarianModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteLibrarianModalLabel">Delete Librarian Account</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/delete_librarian_account" method="GET" id="getDetailsForm" >
+            <div>
+              <input type="email" id="GetDetails" name="GetDetails" placeholder="Librarian Email ID" required />
+              <input type="submit" value="Get Details" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</li>
+
+<li class="nav-item">
+	<!-- ADD BOOK BUTTON -->
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookModal">
+	  + Add
+	</button>
+
+	<!-- Add Book Modal -->
+	<div class="modal fade" id="addBookModal" tabindex="-1" aria-labelledby="addBookModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+		    <h1 class="modal-title fs-5" id="addBookModalLabel">+ Add a Book</h1>
+		    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+		    <form action="/admin_add_book" method="POST" enctype="multipart/form-data" >
+				<div>
+					<label for="sect">Section Name:</label>
+					<input type="text" id="sect" name="sect" placeholder="e.g. Department Name" required />
+				</div>
+				<div>
+					<label for="book_id">Book ID:</label>
+					<input type="text" id="book_id" name="book_id" placeholder="e.g. cs2001" required />
+				</div>
+				<div>
+					<label for="book_name">Book Name:</label>
+					<input type="text" id="book_name" name="book_name" required />
+				</div>
+				<div>
+					<label for="authors">Author(s):</label>
+					<input type="text" id="authors" name="authors" placeholder="e.g. Author1, Author2, ..." required />
+				</div>
+				<div>
+					<label for="synopsis">Synopsis:</label>
+					<input type="text" id="synopsis" name="synopsis" maxlength="1000" placeholder=" Maximum 1000 Characters ..."/>
+				</div>
+				<div>
+					<label for="pages">Pages:</label>
+					<input type="number" id="pages" name="pages" placeholder="No. of Pages in the Book" required />
+				</div>
+				<div>
+					<label for="image">Select Cover Page:</label>
+					<input type="file" id="image" name="image" accept="image/*" required >
+				</div>
+				<div>
+					<label for="pdfFile">Select PDF File:</label>
+					<input type="file" id="pdfFile" name="pdfFile" accept=".pdf" required />
+				</div>
+				<div>
+					<input type="submit" value = "Upload">
+			    </div>
+			</form>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</li>
+  
+<li class="nav-item">
+	<!-- UPDATE BOOK BUTTON -->
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateBookModal">
+	  Update
+	</button>
+
+  <!-- Update Book Modal -->
+  <div class="modal fade" id="updateBookModal" tabindex="-1" aria-labelledby="updateBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateBookModalLabel">Update a Book</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/admin_update_book" method="GET" id="getDetailsForm" >
+            <div>
+              <input type="text" id="GetDetails" name="GetDetails" placeholder="Book ID" required />
+              <input type="submit" value="Get Details" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</li>  
+
+<li class="nav-item">
+	<!-- DELETE BOOK BUTTON -->
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteBookModal">
+	  - Delete
+	</button>
+
+  <!-- Delete Book Modal -->
+  <div class="modal fade" id="deleteBookModal" tabindex="-1" aria-labelledby="deleteBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="deleteBookModalLabel">Remove a Book</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/admin_delete_book" method="GET" id="getDetailsForm" >
+            <div>
+              <input type="text" id="GetDetails" name="GetDetails" placeholder="Book ID" required />
+              <input type="submit" value="Get Details" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</li>
+</ul>
+
+	  </div>
+	</div>
+  </div>
+ </div>
+</div>
+
+
+<br><h3>Pending Book Requests</h3>
+<div class="d-flex flex-row">
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Student ID</th>
+      <th scope="col">Requested Book</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  
+  {% if requests %}
+  
+	  {% for request in requests %}
+		<tr>
+		  <th scope="row">{{ loop.index }}</th>
+		  <td><a href="/admin/student_details/{{request['email']}}"> {{request['email']}} </a></td>
+		  <td><a href="/admin/book_details/{{request['book_id']}}"> {{request['book_id']}} </a></td>
+		  <td>
+		  	  <a href="/admin/accept_request/{{ request['email'] }}/{{ request['book_id'] }}" class="btn btn-success">Issue</a> &nbsp; &nbsp;
+		  	  <a href="/admin/reject_request/{{ request['email'] }}/{{ request['book_id'] }}" class="btn btn-danger">Reject</a>
+		  </td>
+		</tr>
+	  {% endfor %}
+
+  {% else %}
+  		<tr style="text-align: center;">
+    		<td colspan="4">
+            <div style="text-align: center;">
+                <br><br><br><br><h2>---- 0 Pending Requests ----</h2>
+            </div>
+        </td>
+    	</tr>
+    	
+  {% endif %}
+  
+  </tbody>
+</table>
+
+    
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+    <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <span class="fs-4">Menubar</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="#" class="nav-link active" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="/admin_library_page" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          GoTo Library
+        </a>
+      </li>
+      <li>
+        <a href="/admin/pending_returns" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+          Pending Returns
+        </a>
+      </li>
+      <li>
+        <a href="/statistics" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+          Statistics
+        </a>
+      </li>
+      <li>
+        <a href="/admin_logout" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+          Sign Out
+        </a>
+      </li>
+    </ul>
+    <hr>
+  </div>
+</div>
+
+</body>
+
+<script>	    
+    function matchPassword()
+		{ 
+		    var createPassword = document.getElementById("create_password").value;
+		    var confirmPassword = document.getElementById("confirm_password").value;
+
+		  if ( createPassword !== confirmPassword )
+		 	{ alert("Passwords did not match");
+		 	  document.getElementById("create_password").value = '';
+		 	  document.getElementById("confirm_password").value = '';
+		 	}
+		}		
+</script>
+</html>

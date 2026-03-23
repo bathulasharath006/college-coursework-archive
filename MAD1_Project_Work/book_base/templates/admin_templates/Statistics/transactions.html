@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="21f1002877">
+	<title> All Transactions </title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="../../static/css_files/statistics.css">
+
+  </style>
+</head>
+<body>
+	
+	<a href="/admin_logged_in" id="goBackButton">Back</a>
+
+<br>
+<ul class="nav nav-pills nav-fill">
+
+	<li class="nav-item">
+		<a class="btn btn-success" href="/statistics" > Overview </a>
+	</li>
+
+	<li class="nav-item">
+		<a class="btn btn-success" href="/bookStats" > BookWise </a>
+	</li>
+
+	<li class="nav-item">
+		<a class="btn btn-success" href="/sectionStats" > Sections </a>
+	</li>
+
+	<li class="nav-item">
+		<a class="btn btn-primary" href="#" > Transactions </a>
+	</li>
+</ul>
+
+    <!-- PAGINATION LINKS -->
+    <br>
+    <nav aria-label="...">
+	<ul class="pagination justify-content-center">
+
+	  {% if trans.has_prev %}
+	   <li class="page-item">
+		<a class="page-link" href="?page={{ trans.prev_num }}">Previous</a>
+	   </li>
+	  {% else %}
+	  	<li class="page-item disabled">
+		 <a class="page-link">Previous</a>
+		<li>
+	  {% endif %}
+	  </li>
+
+
+	  {% for page_num in trans.iter_pages() %}
+
+	   <li class="page-item">
+		{% if page_num %}
+		  {% if page_num != trans.page %}
+		    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+		  {% else %}
+		    <a class="page-link current active">{{ page_num }}</a>
+		  {% endif %}
+		{% else %}
+		  <a class="page-link current"> . . .</a>
+		  
+		{% endif %}
+	   </li>
+		
+	  {% endfor %}
+
+
+	  {% if trans.has_next %}
+	   <li class="page-item">
+		<a class="page-link" href="?page={{ trans.next_num }}">Next</a>
+	   <li>
+	  {% else %}
+	  	<li class="page-item disabled">
+		 <a class="page-link">Next</a>
+		<li>
+	  {% endif %}
+	  
+	</div>
+    </nav>
+
+<br>
+<div class="d-flex flex-row">
+    <div class="container text-center" >
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Email ID</th>      
+      <th scope="col">Book ID</th>
+      <th scope="col">Action</th>
+      <th scope="col">Issued Date</th>
+      <th scope="col">Return Date</th>
+    </tr>
+  </thead>
+  <tbody>
+
+	 {% for tran in trans %}
+		<tr>
+		  <th scope="row">{{ tran.id }}</th>
+		  <td> {{ tran.email }} </td>		  
+		  <td> {{ tran.book_id }} </td>
+		  <td> {{ tran.action }} </td>
+		  <td> {{ tran.issue_date }} </td>
+		  <td> {{ tran.return_date }} </td>
+		</tr>
+	{% endfor %}
+
+  </tbody>
+</table>
+</div>
+</div>
+
+</body>
+</html>

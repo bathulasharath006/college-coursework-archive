@@ -1,0 +1,27 @@
+	body {
+		background-image: url('/static/user_home_page.avif');
+	}
+
+  	#goBackButton {
+	  position: absolute;
+	  top: 10px;
+	  right: 10px;
+	  text-decoration: none;
+	  padding: 10px;
+	  color: black;
+	  background-color: white;
+	  border: 1px solid silver;
+	  border-radius: 5px;
+	}
+	
+	.button-space {
+    display: inline-block;
+    width: 80px;
+	}
+	
+	h3 {
+	  display: inline-block;
+	  background-color: white;
+	}
+	
+

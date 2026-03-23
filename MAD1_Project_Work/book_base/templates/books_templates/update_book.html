@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="21f1002877">
+  <title>Update Book</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../static/css_files/update_book.css">
+
+</head>
+<body>
+
+		<a href="/admin_logged_in" id="goBackButton">Back</a>
+
+  <div class="container text-center" >
+
+       <form action="/admin_update_book" method="GET" id="getDetailsForm" >
+         <div style="display: inline-flex;">
+           <input type="text" id="GetDetails" name="GetDetails" value="{{ book_id }}" placeholder="Book ID" required />
+           <input type="submit" value="Get Details" />
+         </div>
+       </form>
+       
+		{% if noDetailsMessage %}
+			<h2><p style="bottom: 0; text-align: center; background-color: white;"> {{ noDetailsMessage }} </p></h2>
+		{% endif %}
+		
+			<div class="row" style="background-color: white;">
+              <div class="col-md-7">
+			  	<iframe class="pdf" src="/static/book_files/{{ book_id }}.pdf" width=750px height=850px alt="BOOK FILE NOT FOUND">
+        		</iframe>
+			  </div>
+			  
+			  <div class="col-md-5">
+				<form action="/admin_update_book" method="POST">
+				<div>
+					<br><b><label for="book_id">Book ID:</label></b><br>
+					<input type="text" id="book_id" name="book_id" value="{{ book_id }}" disabled />
+					<input type="hidden" name="book_id" value="{{ book_id }}">
+				</div>
+				<div>
+					<br><b><label >Added on: </label></b><br>
+					<input id="datetime" name="datetime" value="{{ added_on }}" disabled/>
+				</div>
+				<div>
+					<br><b><label for="sect">Section Name:</label></b><br>
+					<input type="text" id="sect" name="sect" value="{{ sect }}" placeholder="e.g. Department Name" required />
+				</div>
+				<div>
+					<br><b><label for="book_name">Book Name:</label></b><br>
+					<input type="text" id="book_name" name="book_name" value="{{ book_name }}" required />
+				</div>
+				<div>
+					<br><b><label for="authors">Author(s):</label></b><br>
+					<input type="text" id="authors" name="authors" value="{{ authors }}" required />
+				</div>
+				<div>
+					<br><b><label for="synopsis">Synopsis:</label></b><br>
+					<input type="text" id="synopsis" name="synopsis" value="{{ synopsis }}" maxlength="1000"  placeholder=" Maximum 1000 Characters ..." />
+				</div>
+				<div>
+					<br><b><label for="pages">Pages:</label></b><br>
+					<input type="number" id="pages" name="pages" value="{{ pages }}" placeholder="No. of Pages in the Book" required />
+				</div>				
+				<div>
+					<input type="submit" value = "Update" style="background-color: #008000;" >
+				</div>
+				</form>
+				
+			  </div>
+	     </div>
+	  </div>
+</body>
+</html>
+
